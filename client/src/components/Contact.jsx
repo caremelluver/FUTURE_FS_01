@@ -29,7 +29,7 @@ const contactInfo = [
   },
 ];
 
-const BACKEND_URL = 'http://localhost:5000';
+const WEB3FORMS_KEY = "YOUR_ACCESS_KEY_HERE"; // Get your free key from https://web3forms.com/
 
 export default function Contact() {
   const ref = useRef(null);
@@ -49,17 +49,29 @@ export default function Contact() {
     setErrorMsg('');
 
     try {
-      await axios.post(`${BACKEND_URL}/api/contact`, form, { timeout: 8000 });
-      setStatus('success');
-      setForm({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
-    } catch (err) {
-      // If backend is down, still show a friendly message
-      if (err.code === 'ERR_NETWORK' || err.code === 'ECONNREFUSED') {
-        setErrorMsg('Backend not reachable. Please email directly at deepakdas212004@gmail.com');
+      const formData = {
+        ...form,
+        access_key: WEB3FORMS_KEY,
+        from_name: "Portfolio Contact Form",
+      };
+
+      const response = await axios.post("https://api.web3forms.com/submit", formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.data.success) {
+        setStatus('success');
+        setForm({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
-        setErrorMsg(err?.response?.data?.message || 'Something went wrong. Please try again.');
+        throw new Error(response.data.message || "Submission failed");
       }
+    } catch (err) {
+      console.error("Form error:", err);
+      setErrorMsg('Submission failed. Please try again or email directly at deepakdas212004@gmail.com');
       setStatus('error');
       setTimeout(() => setStatus('idle'), 6000);
     }
