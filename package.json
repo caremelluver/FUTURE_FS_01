@@ -2,8 +2,8 @@
   "name": "portfolio-root",
   "private": true,
   "scripts": {
-    "install-client": "npm install --prefix client",
-    "build-client": "npm run build --prefix client",
-    "build": "npm run install-client && npm run build-client"
+    "install-frontend": "npm install --prefix frontend",
+    "build-frontend": "npm run build --prefix frontend",
+    "build": "npm run install-frontend && npm run build-frontend"
   }
 }

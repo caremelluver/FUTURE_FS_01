@@ -54,10 +54,10 @@ A high-fidelity, futuristic professional portfolio designed with a **Cyberpunk 2
 
 2. **Setup Backend**:
    ```bash
-   cd server
+   cd backend
    npm install
    ```
-   Create a `.env` file in the `server` directory:
+   Create a `.env` file in the `backend` directory:
    ```env
    PORT=5000
    MONGO_URI=your_mongodb_uri
@@ -67,26 +67,26 @@ A high-fidelity, futuristic professional portfolio designed with a **Cyberpunk 2
 
 3. **Setup Frontend**:
    ```bash
-   cd ../client
+   cd ../frontend
    npm install
    ```
 
 ### Running the Application
 
-- **Start Backend**: `cd server && npm run dev`
-- **Start Frontend**: `cd client && npm run dev`
+- **Start Backend**: `cd backend && npm run dev`
+- **Start Frontend**: `cd frontend && npm run dev`
 
 ---
 
 ## Project Structure
 
 ```text
-├── client/           # React frontend (Vite)
+├── frontend/         # React frontend (Vite)
 │   ├── src/
 │   │   ├── components/ # UI Components (Hero, About, Projects, etc.)
 │   │   ├── assets/     # Images and static files
 │   │   └── App.jsx     # Main application entry
-├── server/           # Node.js Express backend
+├── backend/          # Node.js Express backend
 │   ├── routes/       # API endpoints
 │   ├── models/       # Mongoose schemas
 │   └── server.js     # Entry point
